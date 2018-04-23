@@ -28,6 +28,7 @@ func Save(u model.User) int64 {
 	id, err := res.LastInsertId()
 	checkErr(err)
 
+	db.Close()
 	return id
 }
 
@@ -44,6 +45,7 @@ func Update(u model.User) int64 {
 	id, err := res.RowsAffected()
 	checkErr(err)
 
+	db.Close()
 	return id
 }
 
@@ -59,6 +61,7 @@ func Delete(uid int64) int64 {
 
 	id, err := res.RowsAffected()
 
+	db.Close()
 	return id
 }
 
@@ -88,6 +91,8 @@ func Query(id int64) model.User {
 		}
 		u.Id = id
 	}
+
+	db.Close()
 	return u
 
 }
